@@ -3,10 +3,10 @@ const home =  process.env.HOME || homedir
 const path = require('path')
 const todoList = path.join(home, '.todoList')
 const fs = require('fs')
-const add = require('./add')
+const db = require('./db')
 
 module.exports.add = async (title) => {
-  const list = await add.read()
+  const list = await db.read()
   list.push({ title, done: false })
-  await add.write(list)
+  await db.write(list)
 }

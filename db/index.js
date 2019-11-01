@@ -4,14 +4,14 @@ const path = require('path')
 const fs = require('fs')
 
 
-const add = {
+const db = {
   handleFilePath(filePath) {
     return path.join(filePath || home, '.todoList')
 
   },
   read(filePath) {
     return new Promise((s,r) => {
-      fs.readFile(add.handleFilePath(filePath), { flag: 'a+' }, (err, data) => {
+      fs.readFile(db.handleFilePath(filePath), { flag: 'a+' }, (err, data) => {
         if (err) return r(err)
         let list
         try {
@@ -25,11 +25,11 @@ const add = {
   },
   write(list, filePath) {
     return new Promise((s,r) => {
-      fs.writeFile(add.handleFilePath(filePath), JSON.stringify(list) + '\n', (err) => {
+      fs.writeFile(db.handleFilePath(filePath), JSON.stringify(list) + '\n', (err) => {
         if (err) return r(err)
       })
     })
   }
 }
 
-module.exports = add
+module.exports = db
