@@ -1,6 +1,12 @@
 {
-  "name": "node-to-do-list",
-  "version": "1.0.0",
+  "name": "zch-to-do-list",
+  "version": "0.0.3",
+  "bin": {
+    "t": "cli.js"
+  },
+  "files": [
+    "*.js"
+  ],
   "main": "index.js",
   "repository": "git@github.com:zch233/node-to-do-list.git",
   "author": "zhangchao <529743595@qq.com>",
