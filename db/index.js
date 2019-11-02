@@ -27,6 +27,7 @@ const db = {
     return new Promise((s,r) => {
       fs.writeFile(db.handleFilePath(filePath), JSON.stringify(list) + '\n', (err) => {
         if (err) return r(err)
+        s()
       })
     })
   }

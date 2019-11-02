@@ -11,7 +11,18 @@ program
   .description('add a task')
   .action((...args) => {
     const word = args.splice(1, args.length).join(' ')
-    api.add(word)
+    api.add(word).then(() => console.log('添加成功'), (err) => console.log(err))
+  });
+  
+program
+  .command('clear')
+  .description('clear all task')
+  .action(() => {
+    api.clear().then(() => console.log('清除成功'), (err) => console.log(err))
   });
 
 program.parse(process.argv);
+
+if (process.argv.length === 2) {
+  api.showAll()
+}
