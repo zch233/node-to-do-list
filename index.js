@@ -27,7 +27,7 @@ module.exports.showAll = async () => {
       } else {
         showAll.showSingleList()
           .then(answers2 => {
-            showAll.actionMap[answers2.value] && showAll.actionMap[answers2.value].call(showAll, list, answers1)
+            showAll.actionMap[answers2.value] && showAll.actionMap[answers2.value].call(showAll,this.addOrModify, list, answers1)
           })
       }
     });
@@ -73,13 +73,11 @@ ShowAll.prototype = {
       })
   },
   actionMap: {
-    modify(list, answers) {
+    modify(addOrModify, list, answers) {
       console.log(ShowAll)
       this.askForCreate()
         .then(async title => {
-          // this.addOrModify(title.value, answers.value)
-          list[answers.value].title = title.value
-          await db.write(list)
+          addOrModify(title.value, answers.value)
           console.log('修改成功')
         })
     },
