@@ -14,7 +14,7 @@ program
   .description('add a task')
   .action((...args) => {
     const word = args.splice(1, args.length).join(' ')
-    api.add(word).then(() => console.log('添加成功'), (err) => console.log(err))
+    api.addOrModify(word).then(() => console.log('添加成功'), (err) => console.log(err))
   });
   
 program
