@@ -4,7 +4,7 @@ const inquirer = require('inquirer');
 module.exports.addOrModify = async (title, index) => {
   if (title === '') return Promise.reject('error：请输入待办事项');
   const list = await db.read()
-  index ? (list[index].title = title) : list.push({ title, done: false })
+  index === undefined ? list.push({ title, done: false }) : (list[index].title = title)
   await db.write(list)
 }
 
@@ -27,7 +27,7 @@ module.exports.showAll = async () => {
       } else {
         showAll.showSingleList()
           .then(answers2 => {
-            showAll.actionMap[answers2.value] && showAll.actionMap[answers2.value].call(showAll,this.addOrModify, list, answers1)
+            showAll.actionMap[answers2.value] && showAll.actionMap[answers2.value].call(showAll, list, answers1, this.addOrModify)
           })
       }
     });
@@ -73,8 +73,7 @@ ShowAll.prototype = {
       })
   },
   actionMap: {
-    modify(addOrModify, list, answers) {
-      console.log(ShowAll)
+    modify(list, answers, addOrModify) {
       this.askForCreate()
         .then(async title => {
           addOrModify(title.value, answers.value)
@@ -84,10 +83,12 @@ ShowAll.prototype = {
     async done(list, answers) {
       list[answers.value].done = true
       await db.write(list)
+      console.log('已完成')
     },
     async delete(list, answers) {
       list.splice(answers.value, 1)
       await db.write(list)
+      console.log('已删除')
     },
     quit() {
       console.log('已退出')
