@@ -1,6 +1,6 @@
 {
   "name": "zch-to-do-list",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "bin": {
     "t": "cli.js"
   },
