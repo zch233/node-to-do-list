@@ -4,7 +4,7 @@ const api = require('./index')
 const pkg = require('./package.json')
 
 program
-  .option('--version', 'lookup version')
+  .option('-v, --version', 'lookup version')
 
 program
   .version(pkg.version)
