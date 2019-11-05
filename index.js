@@ -76,7 +76,7 @@ ShowAll.prototype = {
     modify(list, answers, addOrModify) {
       this.askForCreate()
         .then(async title => {
-          addOrModify(title.value, answers.value)
+          await addOrModify(title.value, answers.value)
           console.log('修改成功')
         })
     },
